@@ -132,7 +132,7 @@ jobs:
           persist-credentials: false
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@bb05f3f5519dd87d3ba754cc423b652a5edd6d2c # v4.2.0
+        uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
 
       # Authenticated pulls avoid Docker Hub's anonymous rate limit, which the
       # systemd base images hit on busy days. Optional: skipped when the secrets
@@ -199,7 +199,7 @@ jobs:
         # của GitHub Actions cần runtime token/URL mà chỉ action JS mới export được
         # vào môi trường step. Nếu gọi bash với `--cache-to type=gha`, cache sẽ âm
         # thầm bị bỏ qua.
-        uses: docker/build-push-action@53b7df96c91f9c12dcc8a07bcb9ccacbed38856a # v7.3.0
+        uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
         with:
           context: ./images
           file: ./images/Dockerfile.${{ matrix.image }}
@@ -232,7 +232,7 @@ jobs:
       # vẫn hiện trong job summary.
       - name: Upload Trivy SARIF
         if: ${{ inputs.scan && !cancelled() && github.event.pull_request.head.repo.fork != true }}
-        uses: github/codeql-action/upload-sarif@ff2f1c621b7f889edc0d3c761ac2e6a3f8cdb0dd # v4.37.7
+        uses: github/codeql-action/upload-sarif@2892aa5e19bbd11bc0cff5427e3b750a04d9e3c2 # v4.38.2
         with:
           sarif_file: trivy-results/image-${{ matrix.image }}.sarif
           category: trivy-image-${{ matrix.image }}
